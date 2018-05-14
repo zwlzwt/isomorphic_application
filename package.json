@@ -1,0 +1,38 @@
+{
+  "name": "isomorphic_application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zhao weilong",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.46",
+    "isomorphic-fetch": "^2.2.1",
+    "koa": "^2.5.1",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-helmet": "^5.2.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
+    "stream-to-promise": "^2.2.0",
+    "styled-components": "^3.2.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "@babel/preset-react": "^7.0.0-beta.46",
+    "@babel/preset-stage-0": "^7.0.0-beta.46",
+    "@babel/register": "^7.0.0-beta.46",
+    "babel-loader": "^8.0.0-beta.2",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.1.2",
+    "webpack-dev-middleware": "^3.1.3"
+  }
+}
