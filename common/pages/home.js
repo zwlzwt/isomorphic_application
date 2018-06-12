@@ -1,68 +1,109 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+
+// import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
+
+import { ApolloConsumer, Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 // actions
-import {
-  userInfoAction,
-  homeInfoAction
-} from '../actions/userAction';
+// import {
+//   userInfoAction,
+//   homeInfoAction
+// } from '../actions/userAction';
 
 // selector
-import {
-  selectQueryDataFromUser,
-} from '../reducers/entities'
+// import {
+//   selectQueryDataFromUser,
+// } from '../reducers/entities'
+//
+// const mapStateToProps = (state, ownProps) => {
+//   const userInfo = selectQueryDataFromUser(state)
+//   return {
+//     ...userInfo,
+//   }
+// };
+//
+// const mapDispatchToProps = {
+//   userInfoAction,
+//   homeInfoAction
+// };
+//
+// @connect(mapStateToProps, mapDispatchToProps)
 
-const mapStateToProps = (state, ownProps) => {
-  const userInfo = selectQueryDataFromUser(state)
-  return {
-    ...userInfo,
+const GET_INFO_AUTH = gql`
+{
+  info
+  feed {
+    id
+    url
+    description
   }
-};
-
-const mapDispatchToProps = {
-  userInfoAction,
-  homeInfoAction
-};
-
-@connect(mapStateToProps, mapDispatchToProps)
+  name
+  age
+}
+`
 class Home extends React.Component {
-  static loadData(dispatch) {
-    return Promise.all([dispatch(userInfoAction()), dispatch(homeInfoAction())])
-  }
+  // static loadData(dispatch) {
+  //   return Promise.all([dispatch(userInfoAction()), dispatch(homeInfoAction())])
+  // }
 
   static defaultProps = {
-    title: '',
-    content: '',
     name: '',
-    age: '',
+    age: null,
   }
-
-  // componentDidMount() {
-  //   this.props.userInfoAction()
-  // }
 
   render() {
     const {
-      title,
-      age,
       name,
-      content
+      age,
     } = this.props
     return (
       <React.Fragment>
         <Helmet>
           <title>主页</title>
         </Helmet>
-        <h3>主页</h3>
-        <h3>{title}</h3>
-        <h3>{content}</h3>
+        <label>
+          姓名
+          <input
+            />
+        </label>
+        <label>
+          密码
+          <input
+          />
+        </label>
+        <label>
+          邮箱
+          <input
+          />
+        </label>
         <h1>{name}</h1>
-        <h1>{age}</h1>
+        <h2>{age}</h2>
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default Home;
+export default withRouter(
+  () => (
+    <Query
+      query={GET_INFO_AUTH}
+      >
+      {
+        ({ loading, error, data }) => {
+          if (loading) return "loading..."
+          if (error) return  `Error! {error.message}`
+          return (
+            <Home
+              age={data.age}
+              name={data.name}
+              />
+          )
+        }
+      }
+    </Query>
+  )
+);

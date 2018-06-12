@@ -70,7 +70,7 @@ const App = () => (
         <Route {...route} key={index} />
       ))
     }
-    <RedirectWithStatus from='/page/fuck' to='/page/user' status={301} exact />
+    <RedirectWithStatus from='/page/fuck' to='/page/home' status={301} exact />
     <Route component={NotFound} />
   </Switch>
 );

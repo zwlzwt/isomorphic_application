@@ -1,0 +1,31 @@
+type Query {
+  info: String
+  """
+  the list of Posts by this author
+  """
+  # Link实例拿到root声明，每一个field都需要到它上层申明
+  feed: [Link!]!
+  name: String!
+  age: Int!
+}
+
+type Link {
+  id: ID!
+  description: String!
+  url: String!
+}
+
+type Mutation {
+  post(url: String!, description: String!): Link!
+  deleteLink(id: ID!): [Link!]!
+}
+
+# interface Character  {
+#   id: ID!
+#   name: String!
+#   role: Int!
+# }
+#
+# type Master implements Character {
+#
+# }
