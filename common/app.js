@@ -9,25 +9,9 @@ import ErrorBoundary from './components/errorBoundary'
 import { BrowserRouter } from 'react-router-dom';
 
 // grapql provider
-import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
-import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from "apollo-cache-inmemory";
 
-const preloadedState = window.__INITIAL_STATE__;
-// redux state
-// const store = getStore(preloadedState);
-// delete window.__INITIAL_STATE__;
-
-// graphql state
-const client = new ApolloClient({
-  cache: new InMemoryCache().restore(preloadedState),
-  ssrMode: true,
-  connectToDevTools: true,
-  link: new createHttpLink({
-    uri: '/graphql'
-  })
-});
+import client from '../client/client.js'
 
 const render = () => {
   const rootDom = document.getElementById('root')

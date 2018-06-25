@@ -8,6 +8,9 @@ import { withRouter } from 'react-router'
 import { ApolloConsumer, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
+// 添加本地TODOLIST
+import TodoForm from '../components/todoForm'
+
 // actions
 // import {
 //   userInfoAction,
@@ -65,21 +68,7 @@ class Home extends React.Component {
         <Helmet>
           <title>主页</title>
         </Helmet>
-        <label>
-          姓名
-          <input
-            />
-        </label>
-        <label>
-          密码
-          <input
-          />
-        </label>
-        <label>
-          邮箱
-          <input
-          />
-        </label>
+        <TodoForm></TodoForm>
         <h1>{name}</h1>
         <h2>{age}</h2>
       </React.Fragment>
