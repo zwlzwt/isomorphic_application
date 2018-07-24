@@ -6,9 +6,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/home';
 import User from './pages/userInfoPage';
 
-// actions
-import { userInfoAction } from './actions/userAction'
-
 // redirect include from to status(3**)
 const RedirectWithStatus = ({ from, to, status }) => (
   <Route

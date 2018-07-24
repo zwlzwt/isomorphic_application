@@ -1,21 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-// actions
-import { userInfoAction } from '../actions/userAction';
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-  }
-};
-
-const mapDispatchToProps = {
-  userInfoAction,
-};
-
-@connect(mapStateToProps, mapDispatchToProps)
 class User extends React.Component {
   static loadData(dispatch) {
     return dispatch(userInfoAction())

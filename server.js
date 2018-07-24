@@ -8,6 +8,7 @@ const config = require('./webpack.config');
 const appRouter = require('./server/router');
 const webpackDevMiddleware = require('./middleware/koa-middleware-dev');
 const bodyparser = require('koa-bodyparser');
+const Sequelize = require('sequelize');
 
 const router = new Router();
 const app = new koa();
@@ -25,6 +26,49 @@ app.use(logger());
 
 // parser body
 app.use(bodyparser());
+
+// 数据库链接
+const userName = 'zwlzwt';
+const dataBasePassword = '892110';
+const sequelize = new Sequelize('users', userName, dataBasePassword, {
+  host: 'localhost',
+  dialect: 'mysql',
+  operatorsAliases: false,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+});
+
+const User = sequelize.define('my_bro', {
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  }
+});
+
+app.use(
+  async(ctx, next) => {
+    // force: true 如果表已经存在，将会丢弃表
+    User.sync({ force: true }).then(() => {
+      // 表已创建
+      return User.create({
+        firstName: 'John',
+        lastName: 'Hancock'
+      });
+    });
+
+    User.findAll().then(user => {
+      console.log('fuck');
+      console.log(user);
+    });
+    await next();
+  }
+)
 
 
 // 静态资源托管

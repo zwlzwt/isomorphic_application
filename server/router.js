@@ -33,7 +33,7 @@ const apiPrefix = '/api';
 
 // 引入schema
 let typeDefs;
-const pathName = './server/schema.graphql';
+const pathName = './server/schema/schema.graphql';
 
 if (typeof pathName === 'string' && pathName.endsWith('graphql')) {
   const schemaPath = path.resolve(pathName);
